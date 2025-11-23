@@ -29,7 +29,7 @@ export default class ExternalServices {
       },
       body: JSON.stringify(order)
     };
-    const response = await fetch("http://wdd330-backend.onrender.com/checkout", options);
+    const response = await fetch("https://wdd330-backend.onrender.com/checkout", options);
     const data = await response.json();
     return data;
   }
