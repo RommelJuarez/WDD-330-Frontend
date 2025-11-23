@@ -35,7 +35,6 @@ export default class CheckoutProcess {
     
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     this.itemTotal = itemsArray.reduce((sum, item) => sum + item.FinalPrice, 0);
-    console.log(this.itemTotal);
     document.querySelector(`${this.outputSelector} .subtotal`).textContent = `$${this.itemTotal.toFixed(2)}`;
   }
 
@@ -107,5 +106,5 @@ export default class CheckoutProcess {
     const dataSource = new ExternalServices();
     return await dataSource.checkout(order);
   }
-  
+
 }
