@@ -1,5 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
-//import ExternalServices from "./ExternalServices.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
@@ -78,33 +78,33 @@ export default class CheckoutProcess {
     }));
   }
 
-//   async checkout(form) {
-//     const formData = new FormData(form);
-//     const json = {};
-//     formData.forEach((value, key) => {
-//       json[key] = value;
-//     });
+  async checkout(form) {
+    const formData = new FormData(form);
+    const json = {};
+    formData.forEach((value, key) => {
+      json[key] = value;
+    });
 
-//     const items = getLocalStorage(this.key);
+    const items = getLocalStorage(this.key);
     
-//     const order = {
-//       orderDate: new Date().toISOString(),
-//       fname: json.fname,
-//       lname: json.lname,
-//       street: json.street,
-//       city: json.city,
-//       state: json.state,
-//       zip: json.zip,
-//       cardNumber: json.cardNumber,
-//       expiration: json.expiration,
-//       code: json.code,
-//       items: this.packageItems(items),
-//       orderTotal: this.orderTotal.toFixed(2),
-//       shipping: this.shipping,
-//       tax: this.tax.toFixed(2)
-//     };
+    const order = {
+      orderDate: new Date().toISOString(),
+      fname: json.fname,
+      lname: json.lname,
+      street: json.street,
+      city: json.city,
+      state: json.state,
+      zip: json.zip,
+      cardNumber: json.cardNumber,
+      expiration: json.expiration,
+      code: json.code,
+      items: this.packageItems(items),
+      orderTotal: this.orderTotal.toFixed(2),
+      shipping: this.shipping,
+      tax: this.tax.toFixed(2)
+    };
 
-//     const dataSource = new ExternalServices();
-//     return await dataSource.checkout(order);
-//   }
+    const dataSource = new ExternalServices();
+    return await dataSource.checkout(order);
+  }
 }
