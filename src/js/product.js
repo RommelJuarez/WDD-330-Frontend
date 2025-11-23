@@ -1,11 +1,11 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import { loadHeaderFooter, getParam } from "./utils.mjs";
 import ProductDetails from "./productdetails.mjs";
 loadHeaderFooter();
 const productID = getParam("product");
 const category = getParam("category");
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 
 function addProductToCart(productcart) {
   let cart = getLocalStorage("so-cart") || [];  
