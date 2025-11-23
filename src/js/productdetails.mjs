@@ -16,18 +16,13 @@ export default class ProductDetails {
       this.renderProductDetails();
 
       
-      const button = document.getElementById('addToCart');
-      if (button) {
-        button.addEventListener('click', this.addProductToCart.bind(this));
-      }
+      
     } catch (error) {
-      console.error('Error al inicializar el producto:', error);
+      console.error('Error in productdetails.js:', error);
     }
   }
 
-  addProductToCart() {
-    setLocalStorage('so-cart', this.product);
-  }
+
 
   renderProductDetails() {
     
