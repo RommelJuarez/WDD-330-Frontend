@@ -35,55 +35,74 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
-export function renderWithTemplate(template, parentElement, data, callback  ) {
-  if(callback) {
+export function renderWithTemplate(template, parentElement, data, callback) {
+  if (callback) {
     callback(data);
-  }  
-  parentElement.insertAdjacentHTML("afterbegin",template);
+  }
+  parentElement.insertAdjacentHTML("afterbegin", template);
 }
 
-export async function loadTemplate(path){
-  const res = await fetch(path); 
-  const template = await res.text(); 
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
   return template;
 }
 
 export async function loadHeaderFooter() {
+  
+
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
   const headerElement = document.getElementById("main-header");
   const footerElement = document.getElementById("main-footer");
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+updateCartBadge()
 }
 
 export function alertMessage(message, scroll = true, type = "error") {
   const alert = document.createElement('div');
-  
+
   alert.classList.add('alert');
-  
+
   if (type === "success") {
     alert.classList.add('alert-success');
   } else {
     alert.classList.add('alert-error');
   }
-  
+
   alert.innerHTML = `
     <span class="alert-message">${message}</span>
     <span class="alert-close">✖</span>
   `;
-  
+
   const main = document.querySelector('main');
-  
-  alert.addEventListener('click', function(e) {
+
+  alert.addEventListener('click', function (e) {
     if (e.target.classList.contains('alert-close')) {
       main.removeChild(this);
     }
   });
-  
+
   main.prepend(alert);
-  
+
   if (scroll) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+export function updateCartBadge() {
+  const cartItems = getLocalStorage("so-cart");
+  const badge = document.querySelector(".cart-badge");
+
+  if (!badge) return;
+
+  if (!cartItems || cartItems.length === 0) {
+    badge.textContent = "0";
+    badge.style.display = "none";
+  } else {
+    const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
+    badge.textContent = itemsArray.length;
+    badge.style.display = "flex";
   }
 }
