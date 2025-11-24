@@ -29,10 +29,10 @@ export default class CheckoutProcess {
     const cartItems = getLocalStorage(this.key);
     if (!cartItems || cartItems.length === 0) {
       this.itemTotal = 0;
-      
+
       return;
     }
-    
+
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     this.itemTotal = itemsArray.reduce((sum, item) => sum + item.FinalPrice, 0);
     document.querySelector(`${this.outputSelector} .subtotal`).textContent = `$${this.itemTotal.toFixed(2)}`;
@@ -42,18 +42,18 @@ export default class CheckoutProcess {
     const cartItems = getLocalStorage(this.key);
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     const numItems = itemsArray.length;
-    
+
     this.tax = this.itemTotal * 0.06;
-    
+
     this.orderTotal = this.itemTotal + this.tax + this.shipping;
 
     this.displayOrderTotals();
   }
-    calculateOrderTotalShipping() {
+  calculateOrderTotalShipping() {
     const cartItems = getLocalStorage(this.key);
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     const numItems = itemsArray.length;
-    
+
     this.tax = this.itemTotal * 0.06;
     this.shipping = numItems > 0 ? 10 + (numItems - 1) * 2 : 0;
     this.orderTotal = this.itemTotal + this.tax + this.shipping;
@@ -85,23 +85,24 @@ export default class CheckoutProcess {
     });
 
     const items = getLocalStorage(this.key);
-    
+
     const order = {
       orderDate: new Date().toISOString(),
-      fname: json.fname,
-      lname: json.lname,
+      fname: json.firstName,       
+      lname: json.lastName,        
       street: json.street,
       city: json.city,
       state: json.state,
       zip: json.zip,
       cardNumber: json.cardNumber,
-      expiration: json.expiration,
-      code: json.code,
+      expiration: json.expDate,    
+      code: json.cvv,              
       items: this.packageItems(items),
       orderTotal: this.orderTotal.toFixed(2),
       shipping: this.shipping,
       tax: this.tax.toFixed(2)
     };
+
 
     const dataSource = new ExternalServices();
     return await dataSource.checkout(order);
