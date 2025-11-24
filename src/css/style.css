@@ -501,3 +501,47 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid;
+}
+
+.alert-message {
+  flex: 1;
+}
+
+.alert-close {
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+
+.alert-error {
+  background-color: #fdecea;
+  border-color: #f5c2c0;
+  color: #b71c1c;
+}
+
+.alert-error .alert-close:hover {
+  color: #7f0000;
+}
+
+
+.alert-success {
+  background-color: #e6f7ed;
+  border-color: #9ae6b4;
+  color: #22543d;
+}
+
+.alert-success .alert-close:hover {
+  color: #2f855a;
+}

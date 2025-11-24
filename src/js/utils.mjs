@@ -56,3 +56,34 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll = true, type = "error") {
+  const alert = document.createElement('div');
+  
+  alert.classList.add('alert');
+  
+  if (type === "success") {
+    alert.classList.add('alert-success');
+  } else {
+    alert.classList.add('alert-error');
+  }
+  
+  alert.innerHTML = `
+    <span class="alert-message">${message}</span>
+    <span class="alert-close">✖</span>
+  `;
+  
+  const main = document.querySelector('main');
+  
+  alert.addEventListener('click', function(e) {
+    if (e.target.classList.contains('alert-close')) {
+      main.removeChild(this);
+    }
+  });
+  
+  main.prepend(alert);
+  
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
