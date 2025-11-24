@@ -182,8 +182,6 @@ button {
   border: 1px solid var(--light-grey);
   max-width: 250px;
   text-align: center;
-
-  
 }
 
 .product-card h2,
@@ -495,11 +493,11 @@ footer {
   .checkout-container {
     grid-template-columns: 1fr;
   }
-  
+
   .order-summary {
     position: static;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -527,7 +525,6 @@ footer {
   margin-left: 10px;
 }
 
-
 .alert-error {
   background-color: #fdecea;
   border-color: #f5c2c0;
@@ -537,7 +534,6 @@ footer {
 .alert-error .alert-close:hover {
   color: #7f0000;
 }
-
 
 .alert-success {
   background-color: #e6f7ed;
@@ -576,7 +572,6 @@ footer {
 
 /* Quick View Button */
 .quick-view-btn {
-  
   background-color: #333;
   color: white;
   border: none;
@@ -587,9 +582,6 @@ footer {
   font-size: 0.9rem;
   transition: background-color 0.3s;
   width: 100%;
-  
-
-  
 }
 
 .quick-view-btn:hover {
@@ -698,7 +690,7 @@ footer {
   .modal-body {
     grid-template-columns: 1fr;
   }
-  
+
   .modal-content {
     width: 95%;
     padding: 1rem;
