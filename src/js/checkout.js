@@ -1,4 +1,4 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter,alertMessage } from "./utils.mjs";
 import CheckoutProcess from "./CheckProcess.mjs";
 
 loadHeaderFooter();
@@ -12,16 +12,37 @@ document.querySelector("#zip").addEventListener("blur", () => {
 
 document.querySelector("#checkoutForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  
+
   try {
     const response = await checkout.checkout(e.target);
-    alert("Order submitted successfully!");
-    localStorage.removeItem("so-cart");
     console.log("Order submitted successfully:", response);
-    window.location.href = "/index.html";
+
+    alertMessage("Order submitted successfully!", true, "success");
+
+    localStorage.removeItem("so-cart");
+    window.location.href = "./success.html";
   } catch (error) {
-    console.log( response);
-    //alert("There was an error processing your order.");
-    console.error("Error submitting order:", error);
+    if (error.name === 'servicesError') {
+      console.error("Checkout failed:", error.message);
+      
+      if (typeof error.message === "object") {
+       
+        Object.entries(error.message).forEach(([field, detail]) => {
+          alertMessage(`Error in ${field}: ${detail}`, false, "error");
+        });
+        
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alertMessage(error.message, true, "error");
+      }
+    } else {
+      console.error("Unexpected error:", error);
+      alertMessage("There was an error processing your order. Please try again.", true, "error");
+    }
+
+    const submitButton = document.querySelector(".checkout-button");
+    submitButton.disabled = false;
+    submitButton.textContent = "Complete Purchase";
   }
 });

@@ -1,0 +1,37 @@
+.success-box {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f0fff4; /* light green background */
+  border: 2px solid #38a169; /* green border */
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.success-box h2 {
+  color: #2f855a; /* darker green */
+  margin-bottom: 15px;
+}
+
+.success-box p {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.success-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #38a169; /* green button */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.success-button:hover {
+  background-color: #2f855a; /* darker green on hover */
+}
