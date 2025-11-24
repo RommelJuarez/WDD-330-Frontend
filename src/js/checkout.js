@@ -17,8 +17,11 @@ document.querySelector("#checkoutForm").addEventListener("submit", async (e) => 
     const response = await checkout.checkout(e.target);
     alert("Order submitted successfully!");
     localStorage.removeItem("so-cart");
+    console.log("Order submitted successfully:", response);
     window.location.href = "/index.html";
   } catch (error) {
-    alert("There was an error processing your order.");
+    console.log( response);
+    //alert("There was an error processing your order.");
+    console.error("Error submitting order:", error);
   }
 });
